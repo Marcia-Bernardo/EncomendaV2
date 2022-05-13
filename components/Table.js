@@ -1,25 +1,6 @@
-import Head from "next/head";
-
-import { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 
 const Table = ({ data, types }) => {
-  //   const [data, setData] = useState([]);
-  //   const [types, setTypes] = useState([
-  //     "Batata",
-  //     "Entrecosto",
-  //     "Frango",
-  //     "Lagareiro",
-  //     "Ze do pipo",
-  //     "Recheado",
-  //     "Prego",
-  //     " Bife",
-  //     "Lulas",
-  //     "Lulas c/gambas",
-  //     "Bife a casa",
-  //     "Arroz",
-  //   ]);
-
   return (
     <table className="table table-hover table-bordered">
       <thead className="table-dark">
@@ -42,7 +23,7 @@ const Table = ({ data, types }) => {
           item.items.map((displayItem) => {
             map[displayItem.type] = displayItem.qtd;
           });
-          return <TableRow item={item} types={types} map={map} />;
+          return <TableRow key={item.id} item={item} types={types} map={map} />;
         })}
       </tbody>
       <tfoot></tfoot>
