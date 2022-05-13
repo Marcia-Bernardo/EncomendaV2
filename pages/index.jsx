@@ -61,7 +61,7 @@ const Home= () => {
   ];
 
   const [data, setData] = useState([]);
-  const [types, setTypes] = useState([
+  const [types] = useState([
     "Batata",
     "Entrecosto",
     "Frango",
