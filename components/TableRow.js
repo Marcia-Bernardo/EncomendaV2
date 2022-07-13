@@ -1,9 +1,18 @@
-const TableRow = ({ item, types, map }) => {
+import { compareDates } from "../lib/utils";
+
+const TableRow = ({ item, types, map, displayItem }) => {
   return (
-    <tr key={item.id} className={item.id === 3242 ? "table-warning" : ""}>
+    <tr
+      key={item.id}
+      className={
+        compareDates(item.time, displayItem.confetionTime)
+          ? "table-warning"
+          : ""
+      }
+    >
       <td>{item.name}</td>
       <td>{item.time}</td>
-      <td> {map[types[0]] || ""}</td>
+      {/* <td> {map[types[0]] || ""}</td>
       <td> {map[types[1]] || ""}</td>
       <td> {map[types[2]] || ""}</td>
       <td> {map[types[3]] || ""}</td>
@@ -14,7 +23,11 @@ const TableRow = ({ item, types, map }) => {
       <td> {map[types[8]] || ""}</td>
       <td> {map[types[9]] || ""}</td>
       <td> {map[types[10]] || ""}</td>
-      <td> {map[types[11]] || ""}</td>
+      <td> {map[types[11]] || ""}</td> */}
+
+      {types.map((type, index) => {
+        return <td key={index}>{map[types[index]] || ""}</td>;
+      })}
 
       <td> {item.obs || ""}</td>
     </tr>

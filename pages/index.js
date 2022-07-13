@@ -1,10 +1,8 @@
-
 import Head from "next/head";
-
 import { useState, useEffect } from "react";
 import Table from "../components/Table";
 
-const Home= () => {
+const Home = () => {
   const info = [
     {
       id: 3242,
@@ -61,37 +59,57 @@ const Home= () => {
   ];
 
   const [data, setData] = useState([]);
-  const [types] = useState([
-    "Batata",
-    "Entrecosto",
-    "Frango",
-    "Lagareiro",
-    "Ze do pipo",
-    "Recheado",
-    "Prego",
-    " Bife",
-    "Lulas",
-    "Lulas c/gambas",
-    "Bife a casa",
-    "Arroz",
+  const [types, setTypes] = useState([]);
+  const [months] = useState([
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
   ]);
-
+  const [date] = useState(new Date());
   const getAnswer = async () => {
     setData(info);
-    console.log("interval");
   };
 
+  const getTypes = async () => {
+    const response = await fetch("http://localhost:3001/api/item");
+    const newData = await response.json();
+    console.log(newData);
+    const newTypes = [];
+    if (newData) {
+      newData.forEach((item) => {
+        newTypes.push(item.name);
+      });
+    }
+    setTypes(newTypes);
+  };
   useEffect(() => {
+    getTypes();
     const timer = setInterval(getAnswer, 2000);
     return () => clearInterval(timer);
-    
   }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(getAnswer, 2000);
+  //   return () => clearInterval(timer);
+  // }, []);
+  // const date = new Date();
+
   return (
     <div className="container">
       <Head>
         <title>Encomendas</title>
       </Head>
-      <h1>Encomendas Dia 12 </h1>
+      <h1>
+        Encomendas Dia {date.getDate()} {months[date.getMonth()]}{" "}
+      </h1>
       <Table data={data} types={types}></Table>
     </div>
   );

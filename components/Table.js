@@ -8,6 +8,7 @@ const Table = ({ data, types }) => {
           <th scope="col">Nome</th>
           <th scope="col">Hora</th>
           {types.map((type, index) => {
+            // console.log(type)
             return (
               <th key={index} scope="col">
                 {type}
@@ -19,11 +20,21 @@ const Table = ({ data, types }) => {
       </thead>
       <tbody>
         {data.map((item) => {
+       
           const map = {};
           item.items.map((displayItem) => {
             map[displayItem.type] = displayItem.qtd;
           });
-          return <TableRow key={item.id} item={item} types={types} map={map} />;
+          return (
+            <TableRow
+              key={item.id}
+              item={item}
+              types={types}
+              map={map}
+              displayItem={item}
+            />
+           
+          );
         })}
       </tbody>
       <tfoot></tfoot>
