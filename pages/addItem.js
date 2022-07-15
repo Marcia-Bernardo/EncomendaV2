@@ -2,6 +2,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import ListItems from "../components/addItem/ListItems";
 import ItemCard from "../components/addItem/ItemCard";
+import Form from "../components/addItem/Form";
 
 const AddItem = () => {
   return (
@@ -17,6 +18,8 @@ const AddItem = () => {
             <ListItems />
           </div>
           <div className="col-8">
+            <Form />
+
             <ItemCard />
           </div>
         </div>
