@@ -5,6 +5,9 @@ import ItemCard from "../components/addItem/ItemCard";
 import Form from "../components/addItem/Form";
 
 const AddItem = () => {
+  const [order, setOrder] = useState({});
+  const [itens, setItens] = useState({});
+  console.log(order);
   return (
     <div className="container">
       <Head>
@@ -18,9 +21,9 @@ const AddItem = () => {
             <ListItems />
           </div>
           <div className="col-8">
-            <Form />
+            <Form setOrder={setOrder} order={order} />
 
-            <ItemCard />
+            <ItemCard itens={itens} setItens={setItens} />
           </div>
         </div>
       </div>
