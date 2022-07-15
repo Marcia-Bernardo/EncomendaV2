@@ -107,7 +107,7 @@ const Home = () => {
       <Head>
         <title>Encomendas</title>
       </Head>
-      <h1>
+      <h1 className="mt-3">
         Encomendas Dia {date.getDate()} {months[date.getMonth()]}{" "}
       </h1>
       <Table data={data} types={types}></Table>
@@ -116,4 +116,3 @@ const Home = () => {
 };
 
 export default Home;
-
