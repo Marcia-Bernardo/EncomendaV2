@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 
-const ItemCard = () => {
-  const [itens, setItens] = useState([]);
+const ItemCard = ({ orderItems, setOrderItems }) => {
+  const [items, setItems] = useState([]);
   const [qtd, setQtd] = useState({});
 
   const getItem = async () => {
     const response = await fetch("http://localhost:3001/api/item");
     const allItens = await response.json();
-    setItens(allItens);
+    setItems(allItens);
   };
 
   useEffect(() => {
     getItem();
   }, []);
-  console.log(qtd);
+
   return (
     <div className="container">
       <div className="row">
-        {itens.map((item) => {
+        {items.map((item) => {
           const name = item.name;
           return (
             <div className="col-4" key={item.id}>
@@ -35,14 +35,15 @@ const ItemCard = () => {
                   </div>
                 </div>
               </div>
-              <div className="">
+              <div className="panel-footer text-center">
                 <button
-                  className="float-start btn btn-danger"
+                  className="float-start btn btn-primary  mb-5"
                   onClick={() => {
-                    if (qtd[name] > 0) {
-                      setQtd({
-                        ...qtd,
-                        [name]: qtd[name] == null ? 0 : qtd[name] - 0.5,
+                    if (orderItems[name] > 0) {
+                      setOrderItems({
+                        ...orderItems,
+                        [name]:
+                          orderItems[name] == null ? 0 : orderItems[name] - 0.5,
                       });
                     }
                   }}
@@ -50,16 +51,15 @@ const ItemCard = () => {
                   -
                 </button>
 
-                <span className="" style={{ margin: 55 }}>
-                  {qtd[name]}
-                </span>
+                <span>{orderItems[name]}</span>
 
                 <button
-                  className="float-end btn btn-primary"
+                  className="float-end btn btn-warning  mb-5"
                   onClick={() =>
-                    setQtd({
-                      ...qtd,
-                      [name]: qtd[name] == null ? 0.5 : qtd[name] + 0.5,
+                    setOrderItems({
+                      ...orderItems,
+                      [name]:
+                        orderItems[name] == null ? 0.5 : orderItems[name] + 0.5,
                     })
                   }
                 >

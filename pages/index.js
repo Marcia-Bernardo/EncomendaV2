@@ -82,7 +82,6 @@ const Home = () => {
   const getTypes = async () => {
     const response = await fetch("http://localhost:3001/api/item");
     const newData = await response.json();
-    console.log(newData);
     const newTypes = [];
     if (newData) {
       newData.forEach((item) => {

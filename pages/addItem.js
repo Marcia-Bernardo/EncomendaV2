@@ -6,8 +6,9 @@ import Form from "../components/addItem/Form";
 
 const AddItem = () => {
   const [order, setOrder] = useState({});
-  const [itens, setItens] = useState({});
-  console.log(order);
+  const [items, setItems] = useState({});
+  const [orderLine, setOrderLine] = useState({});
+
   return (
     <div className="container">
       <Head>
@@ -18,12 +19,12 @@ const AddItem = () => {
       <div className="container">
         <div className="row">
           <div className="col-4">
-            <ListItems />
+            <ListItems order={items} />
           </div>
           <div className="col-8">
             <Form setOrder={setOrder} order={order} />
 
-            <ItemCard itens={itens} setItens={setItens} />
+            <ItemCard orderItems={items} setOrderItems={setItems} />
           </div>
         </div>
       </div>
