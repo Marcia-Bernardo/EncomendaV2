@@ -3,8 +3,9 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
 registerLocale("pt", pt);
+
 const Form = ({ setOrder, order }) => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState();
 
   return (
     <form>
@@ -15,7 +16,6 @@ const Form = ({ setOrder, order }) => {
           type="text"
           className="form-control"
           id="exampleInputEmail1"
-          aria-describedby="emailHelp"
           placeholder="Nome"
           onChange={(e) => {
             setOrder({ ...order, name: e.target.value });
@@ -27,6 +27,7 @@ const Form = ({ setOrder, order }) => {
         <label htmlFor="exampleInputEmail1">Data e hora de recolha</label>
         <br />
         <DatePicker
+          placeholderText="Data e hora de entrega"
           selected={date}
           onChange={(newDate) => {
             setDate(newDate);

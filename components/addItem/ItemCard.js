@@ -15,7 +15,7 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="row">
         {items.map((item) => {
           const name = item.name;

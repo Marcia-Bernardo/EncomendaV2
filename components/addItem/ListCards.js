@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
-
-const ListItems = ({ order }) => {
-  console.log(order);
+const ListCards = ({ order }) => {
   return (
     <div>
-      <table className="table table-bordered">
+      <table className="table table-bordered mt-3 ">
         <thead>
           <tr>
             <th scope="col">Produto</th>
@@ -13,7 +10,6 @@ const ListItems = ({ order }) => {
         </thead>
         <tbody>
           {Object.keys(order).map((key, index) => {
-            console.log(key, index);
             return (
               <tr key={index}>
                 <th scope="row">{key}</th>
@@ -42,8 +38,7 @@ const ListItems = ({ order }) => {
             </tr>
         
       })} */}
-      <button onClick={() => {}}>Save</button>
     </div>
   );
 };
-export default ListItems;
+export default ListCards;

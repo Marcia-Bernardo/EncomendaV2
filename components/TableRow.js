@@ -1,32 +1,49 @@
-import { compareDates } from "../lib/utils";
+import { compareDates, getHour } from "../lib/utils";
 
-const TableRow = ({ item, types, map, displayItem }) => {
+const TableRow = ({ item, products, map, displayItem }) => {
+  const changeStatus = async (id, itemName) => {
+    const requestMetadata = {
+      method: "PUT",
+      credential: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, itemName }),
+    };
+
+    const response = await fetch(
+      "http://localhost:3001/api/order",
+      requestMetadata
+    );
+    await response.json();
+  };
+
   return (
-    <tr
-      key={item.id}
-      className={
-        compareDates(item.time, displayItem.confetionTime)
-          ? "table-warning"
-          : ""
-      }
-    >
+    <tr key={item.id}>
       <td>{item.name}</td>
-      <td>{item.time}</td>
-      {/* <td> {map[types[0]] || ""}</td>
-      <td> {map[types[1]] || ""}</td>
-      <td> {map[types[2]] || ""}</td>
-      <td> {map[types[3]] || ""}</td>
-      <td> {map[types[4]] || ""}</td>
-      <td> {map[types[5]] || ""}</td>
-      <td> {map[types[6]] || ""}</td>
-      <td> {map[types[7]] || ""}</td>
-      <td> {map[types[8]] || ""}</td>
-      <td> {map[types[9]] || ""}</td>
-      <td> {map[types[10]] || ""}</td>
-      <td> {map[types[11]] || ""}</td> */}
+      <td>{getHour(item.date)}</td>
 
-      {types.map((type, index) => {
-        return <td key={index}>{map[types[index]] || ""}</td>;
+      {Object.keys(products).map((product, index) => {
+        console.log(map[products[product].name]);
+        return (
+          <td
+            style={{
+              backgroundColor: compareDates(
+                item.date,
+                products[product],
+                map[products[product].name] || 0
+              ),
+            }}
+            key={index}
+            onClick={() => {
+              // console.log(item.id, products[product].name);
+              changeStatus(item.id, products[product].name);
+            }}
+          >
+            {map[products[product].name] || ""}
+          </td>
+        );
       })}
 
       <td> {item.obs || ""}</td>
