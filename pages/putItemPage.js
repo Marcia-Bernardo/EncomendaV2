@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 const PutItemPage = () => {
   const router = useRouter();
-  console.log(router.query.id);
   return (
     <>
       <Head>

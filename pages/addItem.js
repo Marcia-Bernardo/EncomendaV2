@@ -29,12 +29,11 @@ const AddItem = () => {
     };
 
     const response = await fetch(
-      "http://localhost:3001/api/order",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`,
       requestMetadata
     );
 
     const message = await response.json();
-    console.log(message);
     if (message.error) {
       return alert(
         message.error.map((erro) => {

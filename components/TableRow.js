@@ -13,7 +13,7 @@ const TableRow = ({ item, products, map, displayItem }) => {
     };
 
     const response = await fetch(
-      "http://localhost:3001/api/order",
+      `${process.env.BACKEND_URL}/api/order`,
       requestMetadata
     );
     await response.json();
@@ -25,7 +25,6 @@ const TableRow = ({ item, products, map, displayItem }) => {
       <td>{getHour(item.date)}</td>
 
       {Object.keys(products).map((product, index) => {
-        console.log(map[products[product].name]);
         return (
           <td
             style={{

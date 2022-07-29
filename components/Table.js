@@ -5,16 +5,19 @@ const Table = () => {
   const [data, setData] = useState([]);
 
   const [products, setProducts] = useState([]);
-
   const getAnswer = async () => {
-    const response = await fetch("http://localhost:3001/api/all");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/all`
+    );
 
     const newData = await response.json();
     setData(newData);
   };
 
   const getProducts = async () => {
-    const response = await fetch("http://localhost:3001/api/item");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`
+    );
     const newData = await response.json();
     const products = [];
     if (newData) {
@@ -27,7 +30,8 @@ const Table = () => {
 
   useEffect(() => {
     getProducts();
-    const timer = setInterval(getAnswer, 2000);
+    getAnswer();
+    const timer = setInterval(getAnswer, 1000*60*5);
     return () => clearInterval(timer);
   }, []);
   return (

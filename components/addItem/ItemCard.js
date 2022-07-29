@@ -5,7 +5,9 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
   const [qtd, setQtd] = useState({});
 
   const getItem = async () => {
-    const response = await fetch("http://localhost:3001/api/item");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`
+    );
     const allItens = await response.json();
     setItems(allItens);
   };

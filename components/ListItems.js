@@ -4,7 +4,9 @@ const ListItems = () => {
   const [items, setItems] = useState([]);
 
   const listAllItems = async () => {
-    const response = await fetch("http://localhost:3001/api/item");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`
+    );
     const listAllI = await response.json();
     setItems(listAllI);
   };
@@ -14,7 +16,6 @@ const ListItems = () => {
   }, []);
 
   const deleteItem = async (id) => {
-    console.log(id);
     const requestMetadata = {
       method: "DELETE",
       credential: "same-origin",
@@ -28,7 +29,7 @@ const ListItems = () => {
     };
 
     const response = await fetch(
-      "http://localhost:3001/api/item",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`,
       requestMetadata
     );
     await response.json();

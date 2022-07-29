@@ -20,11 +20,10 @@ const CreateItem = ({ method, id }) => {
     };
 
     const response = await fetch(
-      "http://localhost:3001/api/item",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`,
       requestMetadata
     );
     const message = await response.json();
-    console.log(message);
     if (message.error) {
       return alert(
         message.error.map((erro, index) => {
@@ -41,7 +40,9 @@ const CreateItem = ({ method, id }) => {
   };
 
   const getItem = async () => {
-    const response = await fetch(`http://localhost:3001/api/item/${id}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item/${id}`
+    );
     const newData = await response.json();
 
     if (newData) {
