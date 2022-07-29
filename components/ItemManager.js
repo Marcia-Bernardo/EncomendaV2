@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const CreateItem = ({ method, id }) => {
+const ItemManager = ({ method, id }) => {
   const [saveName, setSaveName] = useState("");
   const [saveConfTime, setSaveConfTime] = useState("");
 
@@ -107,4 +107,4 @@ const CreateItem = ({ method, id }) => {
   );
 };
 
-export default CreateItem;
+export default ItemManager;

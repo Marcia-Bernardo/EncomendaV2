@@ -1,13 +1,14 @@
+import OrderManager from "../components/addItem/OrderManager";
 import Head from "next/head";
-import ListItems from "../components/ListItems";
 import { useRouter } from "next/router";
 
-const ListItemsPage = () => {
+const UpdateOrderPage = () => {
   const router = useRouter();
-
   return (
     <>
-      <Head>Listar Itens</Head>
+      <Head>
+        <title>Editar item</title>
+      </Head>
 
       <div className="container mt-3">
         <button
@@ -19,14 +20,11 @@ const ListItemsPage = () => {
         >
           <img src="/back.png" alt="me" width="25" height="25" />
         </button>
-
-        <h1>Listar itens</h1>
-      </div>
-      <div className="container">
-        <ListItems />
+        <h2>Editar item</h2>
+        <OrderManager method="PUT" id={router.query.id} />
       </div>
     </>
   );
 };
 
-export default ListItemsPage;
+export default UpdateOrderPage;

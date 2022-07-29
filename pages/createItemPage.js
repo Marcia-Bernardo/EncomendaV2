@@ -1,17 +1,30 @@
 import Head from "next/head";
-import CreateItem from "../components/CreateItem";
+import ItemManager from "../components/ItemManager";
+import { useRouter } from "next/router";
 
 const CreateItemPage = () => {
+  const router = useRouter();
   return (
     <>
       <Head>
         <title>Criar item</title>
       </Head>
-      <div className="container mt-3">
-        <h1 className="mt-3">Criar item</h1>
 
-        <div className="container mt-5 " style={{ paddingRight: 500 }}>
-          <CreateItem method="POST" />
+      <div className="container mt-2">
+        <button
+          type="button"
+          className="float-end btn "
+          onClick={() => {
+            router.push("/");
+          }}
+        >
+          <img src="/back.png" alt="me" width="25" height="25" />
+        </button>
+
+        <h2 className="mt-3">Criar item</h2>
+
+        <div className="container mt-3" style={{ paddingRight: 500 }}>
+          <ItemManager method="POST" />
         </div>
       </div>
     </>

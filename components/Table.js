@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 
-const Table = () => {
+const Table = ({ showEdit, date }) => {
   const [data, setData] = useState([]);
 
   const [products, setProducts] = useState([]);
@@ -10,8 +10,21 @@ const Table = () => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/all`
     );
 
-    const newData = await response.json();
-    setData(newData);
+    const orderData = await response.json();
+
+    const filteredResults = orderData.filter((order) => {
+      const dateToSearch = new Date(order.date);
+
+      const newDate = `${dateToSearch.getFullYear()}-${
+        dateToSearch.getMonth() + 1
+      }-${dateToSearch.getDate()}`;
+      const searchDate = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
+      console.log(newDate == searchDate);
+      return newDate == searchDate;
+    });
+    return setData(filteredResults);
   };
 
   const getProducts = async () => {
@@ -31,13 +44,13 @@ const Table = () => {
   useEffect(() => {
     getProducts();
     getAnswer();
-    const timer = setInterval(getAnswer, 1000*60*5);
+    const timer = setInterval(getAnswer, 1000 * 60 * 5);
     return () => clearInterval(timer);
-  }, []);
+  }, [date]);
   return (
     <table className="table  table-bordered">
       <thead className="table-dark">
-        <tr>
+        <tr align="center">
           <th scope="col">Nome</th>
           <th scope="col">Hora</th>
           {Object.keys(products).map((key, index) => {
@@ -48,22 +61,29 @@ const Table = () => {
             );
           })}
           <th>OBS</th>
+          {showEdit && (
+            <>
+              <th>Editar</th>
+              <th>Deletar</th>
+            </>
+          )}
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => {
+        {data.map((order) => {
           const map = {};
-          item.items.map((displayItem) => {
+          order.items.map((displayItem) => {
             map[displayItem.item] = [displayItem.qtd, displayItem.isPreparing];
           });
 
           return (
             <TableRow
-              key={item.id}
-              item={item}
+              key={order.id}
+              order={order}
               products={products}
               map={map}
-              displayItem={item}
+              displayItem={order}
+              showEdit={showEdit}
             />
           );
         })}

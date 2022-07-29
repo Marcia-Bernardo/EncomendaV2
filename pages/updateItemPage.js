@@ -1,14 +1,14 @@
 import Head from "next/head";
-import ListItems from "../components/ListItems";
+import ItemManager from "../components/ItemManager";
 import { useRouter } from "next/router";
 
-const ListItemsPage = () => {
+const UpdateItemPage = () => {
   const router = useRouter();
-
   return (
     <>
-      <Head>Listar Itens</Head>
-
+      <Head>
+        <title>Editar item</title>
+      </Head>
       <div className="container mt-3">
         <button
           type="button"
@@ -19,14 +19,14 @@ const ListItemsPage = () => {
         >
           <img src="/back.png" alt="me" width="25" height="25" />
         </button>
+        <h2 className="mt-3">Editar item</h2>
 
-        <h1>Listar itens</h1>
-      </div>
-      <div className="container">
-        <ListItems />
+        <div className="container mt-5 " style={{ paddingRight: 500 }}>
+          <ItemManager method="PUT" id={router.query.id} />
+        </div>
       </div>
     </>
   );
 };
 
-export default ListItemsPage;
+export default UpdateItemPage;

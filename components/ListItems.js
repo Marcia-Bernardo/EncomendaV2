@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
 const ListItems = () => {
   const [items, setItems] = useState([]);
 
@@ -58,7 +59,7 @@ const ListItems = () => {
                 <td>
                   <Link
                     href={{
-                      pathname: "/putItemPage",
+                      pathname: "/updateItemPage",
                       query: { id: item.id },
                     }}
                   >

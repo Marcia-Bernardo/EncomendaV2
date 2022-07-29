@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const ItemCard = ({ orderItems, setOrderItems }) => {
   const [items, setItems] = useState([]);
-  const [qtd, setQtd] = useState({});
 
   const getItem = async () => {
     const response = await fetch(
@@ -41,11 +40,21 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
                 <button
                   className="float-start btn btn-primary  mb-5"
                   onClick={() => {
+                    if (orderItems[name] - 0.5 == 0) {
+                      const newOrder = {
+                        ...orderItems,
+                      };
+                      delete newOrder[name];
+
+                      return setOrderItems({
+                        ...newOrder,
+                      });
+                    }
+
                     if (orderItems[name] > 0) {
                       setOrderItems({
                         ...orderItems,
-                        [name]:
-                          orderItems[name] == null ? 0 : orderItems[name] - 0.5,
+                        [name]: orderItems[name] - 0.5,
                       });
                     }
                   }}
