@@ -20,7 +20,7 @@ const Login = () => {
     };
 
     const response = await fetch(
-      "http://localhost:3001/api/login",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
       requestMetadata
     );
 
@@ -40,7 +40,7 @@ const Login = () => {
         expires: 1000 * 24 * 365 * 60 * 60, // 1 year cookie
       });
 
-      router.push("/");
+      router.push("/orderPage");
     }
     // alert(message);
   };

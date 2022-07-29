@@ -6,7 +6,7 @@ import ListCards from "./ListCards";
 const OrderManager = ({ method, id }) => {
   const [clientData, setClientData] = useState({});
   const [orderItems, setOrderItems] = useState({});
-
+  const [loading, setLoading] = useState(true);
   const sendRequest = async () => {
     const items = [];
 
@@ -40,11 +40,18 @@ const OrderManager = ({ method, id }) => {
         })
       );
     }
-    alert(message);
+    setClientData({
+      name: "",
+      date: "",
+      obs: "",
+    });
+    setOrderItems({});
   };
 
   const getOrder = async () => {
-    const response = await fetch(`http://localhost:3001/api/order/${id}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order/${id}`
+    );
     const newData = await response.json();
 
     if (newData) {
@@ -55,6 +62,7 @@ const OrderManager = ({ method, id }) => {
       });
       setOrderItems(Object.assign({}, ...newData.items));
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -62,7 +70,9 @@ const OrderManager = ({ method, id }) => {
       getOrder();
     }
   }, []);
-
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
   return (
     <div className="container">
       <div className="container mt-3 ">
@@ -70,12 +80,13 @@ const OrderManager = ({ method, id }) => {
           <div className="col-3">
             <ListCards order={orderItems} />
             <button
+              className="float-end"
               onClick={(e) => {
                 e.preventDefault();
                 sendRequest();
               }}
             >
-              Save
+              Enviar
             </button>
           </div>
           <div className="col-8">

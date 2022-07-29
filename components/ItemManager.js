@@ -90,17 +90,13 @@ const ItemManager = ({ method, id }) => {
       </div>
       <div className="container ">
         <button
-          className="btn btn-primary col-3-lg-4 m-3"
+          className="btn btn-primary col-3-lg-4 m-3 float-end"
           onClick={(e) => {
             e.preventDefault();
             saveItem();
           }}
         >
-          Submeter
-        </button>
-
-        <button className="btn btn-secondary col-3-lg-4" onClick={() => {}}>
-          Cancelar
+          Enviar
         </button>
       </div>
     </form>

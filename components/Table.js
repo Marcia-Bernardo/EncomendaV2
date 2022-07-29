@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { getColIndex } from "../lib/utils";
 import TableRow from "./TableRow";
 
-const Table = ({ showEdit, date }) => {
+const Table = ({ showEdit, date, combination }) => {
   const [data, setData] = useState([]);
+  const [admin, setAdmin] = useState(true);
 
   const [products, setProducts] = useState([]);
   const getAnswer = async () => {
@@ -21,12 +23,12 @@ const Table = ({ showEdit, date }) => {
       const searchDate = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
-      console.log(newDate == searchDate);
+      // console.log(newDate == searchDate);
       return newDate == searchDate;
     });
+
     return setData(filteredResults);
   };
-
   const getProducts = async () => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`
@@ -56,16 +58,24 @@ const Table = ({ showEdit, date }) => {
           {Object.keys(products).map((key, index) => {
             return (
               <th key={index} scope="col">
-                {products[key].name}
+                {combination
+                  ? getColIndex(products[key].name)
+                  : products[key].name}
               </th>
             );
           })}
           <th>OBS</th>
-          {showEdit && (
+
+          {/* <th>PRONTO</th> */}
+          {showEdit ? (
             <>
               <th>Editar</th>
               <th>Deletar</th>
             </>
+          ) : admin ? (
+            <th>Entregue</th>
+          ) : (
+            <th>Pronto</th>
           )}
         </tr>
       </thead>
@@ -84,6 +94,7 @@ const Table = ({ showEdit, date }) => {
               map={map}
               displayItem={order}
               showEdit={showEdit}
+              admin={admin}
             />
           );
         })}

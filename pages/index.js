@@ -1,47 +1,19 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
-import Table from "../components/Table";
+import React from "react";
+import Login from "../components/Login";
 
-import DropdownAdmin from "../components/DropdownAdmin";
-
-const Home = () => {
-  const [months] = useState([
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ]);
-
-  const [date] = useState(new Date());
-
+const LoginPage = () => {
   return (
     <>
       <Head>
-        <title>Encomendas</title>
+        <title>Logar</title>
       </Head>
-      <div className="container">
-        <div className="mt-2">
-          <DropdownAdmin />
-        </div>
-
-        <h2 className="mt-3">
-          Encomendas do dia: {date.getDate()} {months[date.getMonth()]}{" "}
-        </h2>
-
-        <div className="mt-3">
-          <Table date={new Date()} />
-        </div>
+      <div className="container mt-3" style={{ paddingRight: 500 }}>
+        <h2>Entrar conta</h2>
+        <Login />
       </div>
     </>
   );
 };
 
-export default Home;
+export default LoginPage;

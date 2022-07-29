@@ -6,7 +6,8 @@ import { useState } from "react";
 
 const ListOrderPage = () => {
   const router = useRouter();
-  const [dateToFilter, setDateToFilter] = useState();
+  const [dateToFilter, setDateToFilter] = useState(new Date());
+
   return (
     <>
       <Head>Listar Pedido</Head>
@@ -16,7 +17,7 @@ const ListOrderPage = () => {
           type="button"
           className="float-end btn "
           onClick={() => {
-            router.push("/");
+            router.push("/orderPage");
           }}
         >
           <img src="/back.png" alt="me" width="25" height="25" />

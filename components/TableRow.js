@@ -1,11 +1,14 @@
 import { compareDates, getHour } from "../lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import DatePicker, { registerLocale } from "react-datepicker";
+import { useRouter } from "next/router";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
 registerLocale("pt", pt);
 
-const TableRow = ({ order, products, map, showEdit }) => {
+const TableRow = ({ order, products, map, showEdit, admin }) => {
+  const router = useRouter();
   const changeStatus = async (id, itemName) => {
     const requestMetadata = {
       method: "PUT",
@@ -38,7 +41,7 @@ const TableRow = ({ order, products, map, showEdit }) => {
     };
 
     const response = await fetch(
-      "http://localhost:3001/api/order",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`,
       requestMetadata
     );
     await response.json();
@@ -70,17 +73,19 @@ const TableRow = ({ order, products, map, showEdit }) => {
       })}
 
       <td> {order.obs || ""}</td>
-      {showEdit && (
+
+      {showEdit ? (
         <>
           <td>
-            <Link
-              href={{
-                pathname: "/updateOrderPage",
-                query: { id: order.id },
+            <button
+              type="button"
+              className="btn  btn-sm "
+              onClick={() => {
+                router.push(`/updateOrderPage?id=${order.id}`);
               }}
             >
-              <img src="/pencil.png" alt="me" width="25" height="25" />
-            </Link>
+              <Image src="/pencil.png" alt="me" width={25} height={25} />
+            </button>
           </td>
           <td>
             <button
@@ -90,10 +95,34 @@ const TableRow = ({ order, products, map, showEdit }) => {
                 deleteOrder(order.id);
               }}
             >
-              <img src="/trash.png" alt="me" width="25" height="25" />
+              <Image src="/trash.png" alt="me" width="25" height="25" />
             </button>
           </td>
         </>
+      ) : admin ? (
+        <td>
+          <button
+            type="button"
+            className="btn  btn-sm "
+            onClick={() => {
+              router.push(`/listOrderPage`);
+            }}
+          >
+            <Image src="/delivered.png" alt="me" width={40} height={43} />
+          </button>
+        </td>
+      ) : (
+        <td>
+          <button
+            type="button"
+            className="btn  btn-sm "
+            onClick={() => {
+              router.push(`/listOrderPage`);
+            }}
+          >
+            <Image src="/ready.png" alt="me" width={20} height={20} />
+          </button>
+        </td>
       )}
     </tr>
   );

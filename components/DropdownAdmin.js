@@ -46,7 +46,7 @@ const DropdownAdmin = () => {
             router.push("/loginPage");
           }}
         >
-          Sair da conta
+          Sair
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

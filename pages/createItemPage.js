@@ -15,7 +15,7 @@ const CreateItemPage = () => {
           type="button"
           className="float-end btn "
           onClick={() => {
-            router.push("/");
+            router.push("/orderPage");
           }}
         >
           <img src="/back.png" alt="me" width="25" height="25" />

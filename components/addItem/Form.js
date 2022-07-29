@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
@@ -6,6 +6,14 @@ registerLocale("pt", pt);
 
 const Form = ({ setOrder, order }) => {
   const [date, setDate] = useState();
+
+  useEffect(() => {
+    console.log("date", order.date);
+    if (order.date) {
+      setDate(new Date(order.date));
+    }
+  }, []);
+
   return (
     <form>
       <div className="form-group">
@@ -16,7 +24,7 @@ const Form = ({ setOrder, order }) => {
           className="form-control"
           id="exampleInputEmail1"
           placeholder="Nome"
-          defaultValue={order.name}
+          value={order.name}
           onChange={(e) => {
             setOrder({ ...order, name: e.target.value });
           }}
@@ -27,10 +35,10 @@ const Form = ({ setOrder, order }) => {
         <label htmlFor="exampleInputEmail1">Data e hora de recolha</label>
         <br />
         <DatePicker
-          placeholderText="Data e hora de entrega"
+          placeholderText="Defina aqui"
           selected={date}
           onChange={(newDate) => {
-            setDate(newDate);
+            console.log(newDate);
             setOrder({ ...order, date: newDate });
           }}
           locale="pt"
@@ -50,7 +58,7 @@ const Form = ({ setOrder, order }) => {
           className="form-control"
           id="exampleInputPassword1"
           placeholder="Observação"
-          defaultValue={order.obs}
+          value={order.obs}
           onChange={(e) => {
             setOrder({ ...order, obs: e.target.value });
           }}
