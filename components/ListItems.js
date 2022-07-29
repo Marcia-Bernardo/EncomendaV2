@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
 const ListItems = () => {
   const [items, setItems] = useState([]);
 
@@ -14,7 +15,6 @@ const ListItems = () => {
   }, []);
 
   const deleteItem = async (id) => {
-    console.log(id);
     const requestMetadata = {
       method: "DELETE",
       credential: "same-origin",
@@ -57,7 +57,7 @@ const ListItems = () => {
                 <td>
                   <Link
                     href={{
-                      pathname: "/putItemPage",
+                      pathname: "/updateItemPage",
                       query: { id: item.id },
                     }}
                   >

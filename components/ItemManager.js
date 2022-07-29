@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const CreateItem = ({ method, id }) => {
+const ItemManager = ({ method, id }) => {
   const [saveName, setSaveName] = useState("");
   const [saveConfTime, setSaveConfTime] = useState("");
 
@@ -24,7 +24,6 @@ const CreateItem = ({ method, id }) => {
       requestMetadata
     );
     const message = await response.json();
-    console.log(message);
     if (message.error) {
       return alert(
         message.error.map((erro, index) => {
@@ -106,4 +105,4 @@ const CreateItem = ({ method, id }) => {
   );
 };
 
-export default CreateItem;
+export default ItemManager;

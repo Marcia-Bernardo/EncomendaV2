@@ -2,6 +2,8 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import Table from "../components/Table";
 
+import DropdownAdmin from "../components/DropdownAdmin";
+
 const Home = () => {
   const [months] = useState([
     "Janeiro",
@@ -21,17 +23,24 @@ const Home = () => {
   const [date] = useState(new Date());
 
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Encomendas</title>
       </Head>
-      <h1 className="mt-5">
-        Encomendas do dia: {date.getDate()} {months[date.getMonth()]}{" "}
-      </h1>
-      <div className="mt-5">
-        <Table />
+      <div className="container">
+        <div className="mt-2">
+          <DropdownAdmin />
+        </div>
+
+        <h2 className="mt-3">
+          Encomendas do dia: {date.getDate()} {months[date.getMonth()]}{" "}
+        </h2>
+
+        <div className="mt-3">
+          <Table date={new Date()} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

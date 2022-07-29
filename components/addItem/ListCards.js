@@ -1,4 +1,5 @@
 const ListCards = ({ order }) => {
+  console.log(order);
   return (
     <div>
       <table className="table table-bordered mt-3 ">
@@ -19,25 +20,6 @@ const ListCards = ({ order }) => {
           })}
         </tbody>
       </table>
-
-      {/* {order.map((item) => {
-        const name = item.name;
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Produto</th>
-              <th scope="col">Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" key={item.id}>
-                {item.name}
-              </th>
-              <td>{qtd[name]}</td>
-            </tr>
-        
-      })} */}
     </div>
   );
 };

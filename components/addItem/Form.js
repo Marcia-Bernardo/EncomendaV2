@@ -6,7 +6,6 @@ registerLocale("pt", pt);
 
 const Form = ({ setOrder, order }) => {
   const [date, setDate] = useState();
-
   return (
     <form>
       <div className="form-group">
@@ -17,6 +16,7 @@ const Form = ({ setOrder, order }) => {
           className="form-control"
           id="exampleInputEmail1"
           placeholder="Nome"
+          defaultValue={order.name}
           onChange={(e) => {
             setOrder({ ...order, name: e.target.value });
           }}
@@ -50,6 +50,7 @@ const Form = ({ setOrder, order }) => {
           className="form-control"
           id="exampleInputPassword1"
           placeholder="Observação"
+          defaultValue={order.obs}
           onChange={(e) => {
             setOrder({ ...order, obs: e.target.value });
           }}

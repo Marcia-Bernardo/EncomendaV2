@@ -1,10 +1,9 @@
-import Head from "next/head";
-import React, { useState } from "react";
-import ListCards from "../components/addItem/ListCards";
-import ItemCard from "../components/addItem/ItemCard";
-import Form from "../components/addItem/Form";
+import { useEffect, useState } from "react";
+import Form from "./Form";
+import ItemCard from "./ItemCard";
+import ListCards from "./ListCards";
 
-const AddItem = () => {
+const OrderManager = ({ method, id }) => {
   const [clientData, setClientData] = useState({});
   const [orderItems, setOrderItems] = useState({});
 
@@ -19,7 +18,7 @@ const AddItem = () => {
     });
 
     const requestMetadata = {
-      method: "POST",
+      method: method,
       credential: "same-origin",
       headers: {
         Accept: "application/json",
@@ -34,7 +33,6 @@ const AddItem = () => {
     );
 
     const message = await response.json();
-    console.log(message);
     if (message.error) {
       return alert(
         message.error.map((erro) => {
@@ -45,13 +43,28 @@ const AddItem = () => {
     alert(message);
   };
 
+  const getOrder = async () => {
+    const response = await fetch(`http://localhost:3001/api/order/${id}`);
+    const newData = await response.json();
+
+    if (newData) {
+      setClientData({
+        name: newData.name,
+        date: newData.date,
+        obs: newData.obs,
+      });
+      setOrderItems(Object.assign({}, ...newData.items));
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getOrder();
+    }
+  }, []);
+
   return (
     <div className="container">
-      <Head>
-        <title>Item</title>
-      </Head>
-      <h1 className="mt-3">Items</h1>
-
       <div className="container mt-3 ">
         <div className="row justify-content-between">
           <div className="col-3">
@@ -76,4 +89,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem;
+export default OrderManager;
