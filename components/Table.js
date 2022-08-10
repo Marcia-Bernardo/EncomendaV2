@@ -7,7 +7,7 @@ const Table = ({ showEdit, date, combination }) => {
   const [admin, setAdmin] = useState(true);
 
   const [products, setProducts] = useState([]);
-  const getAnswer = async () => {
+  const getOrders = async () => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/all`
     );
@@ -15,16 +15,8 @@ const Table = ({ showEdit, date, combination }) => {
     const orderData = await response.json();
 
     const filteredResults = orderData.filter((order) => {
-      const dateToSearch = new Date(order.date);
-
-      const newDate = `${dateToSearch.getFullYear()}-${
-        dateToSearch.getMonth() + 1
-      }-${dateToSearch.getDate()}`;
-      const searchDate = `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()}`;
-      // console.log(newDate == searchDate);
-      return newDate == searchDate;
+      order.items.map((item) => {});
+      return order;
     });
 
     return setData(filteredResults);
@@ -45,8 +37,8 @@ const Table = ({ showEdit, date, combination }) => {
 
   useEffect(() => {
     getProducts();
-    getAnswer();
-    const timer = setInterval(getAnswer, 1000 * 60 * 5);
+    getOrders();
+    const timer = setInterval(getOrders, 1000 * 60 * 5);
     return () => clearInterval(timer);
   }, [date]);
   return (
@@ -83,7 +75,7 @@ const Table = ({ showEdit, date, combination }) => {
         {data.map((order) => {
           const map = {};
           order.items.map((displayItem) => {
-            map[displayItem.item] = [displayItem.qtd, displayItem.isPreparing];
+            map[displayItem.item] = [displayItem.qtd, displayItem.status];
           });
 
           return (
@@ -95,6 +87,7 @@ const Table = ({ showEdit, date, combination }) => {
               displayItem={order}
               showEdit={showEdit}
               admin={admin}
+              getOrders={getOrders}
             />
           );
         })}

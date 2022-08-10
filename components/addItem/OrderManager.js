@@ -7,6 +7,9 @@ const OrderManager = ({ method, id }) => {
   const [clientData, setClientData] = useState({});
   const [orderItems, setOrderItems] = useState({});
   const [loading, setLoading] = useState(true);
+  const [classAlert, setClassAlert] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+
   const sendRequest = async () => {
     const items = [];
 
@@ -16,7 +19,7 @@ const OrderManager = ({ method, id }) => {
         qtd: orderItems[key],
       });
     });
-
+    console.log(clientData, items);
     const requestMetadata = {
       method: method,
       credential: "same-origin",
@@ -34,11 +37,13 @@ const OrderManager = ({ method, id }) => {
 
     const message = await response.json();
     if (message.error) {
-      return alert(
-        message.error.map((erro) => {
-          return erro.msg + "\n";
-        })
-      );
+      setClassAlert("alert alert-danger alert-dismissible fade show");
+
+      const error = message.error.map((erro) => {
+        return <p>{erro.msg}</p>;
+      });
+      setAlertMessage(error);
+      return;
     }
     setClientData({
       name: "",
@@ -46,6 +51,8 @@ const OrderManager = ({ method, id }) => {
       obs: "",
     });
     setOrderItems({});
+    setClassAlert("alert alert-success alert-dismissible fade show");
+    setAlertMessage("Pedido criado com sucesso!");
   };
 
   const getOrder = async () => {
@@ -60,7 +67,14 @@ const OrderManager = ({ method, id }) => {
         date: newData.date,
         obs: newData.obs,
       });
-      setOrderItems(Object.assign({}, ...newData.items));
+      const items = newData.items.map((item) => {
+        const newItem = {};
+        newItem[item.item] = parseInt(item.qtd);
+
+        return newItem;
+      });
+      console.log(items);
+      setOrderItems(Object.assign({}, ...items));
     }
     setLoading(false);
   };
@@ -69,6 +83,7 @@ const OrderManager = ({ method, id }) => {
     if (id) {
       getOrder();
     }
+    setLoading(false);
   }, []);
   if (loading) {
     return <h1>Loading</h1>;
@@ -79,6 +94,9 @@ const OrderManager = ({ method, id }) => {
         <div className="row justify-content-between">
           <div className="col-3">
             <ListCards order={orderItems} />
+            <div className={classAlert} role="alert">
+              {alertMessage}
+            </div>
             <button
               className="float-end"
               onClick={(e) => {
@@ -88,6 +106,7 @@ const OrderManager = ({ method, id }) => {
             >
               Enviar
             </button>
+            <br></br>
           </div>
           <div className="col-8">
             <Form setOrder={setClientData} order={clientData} />

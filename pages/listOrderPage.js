@@ -10,6 +10,7 @@ const ListOrderPage = () => {
 
   return (
     <>
+    
       <Head>Listar Pedido</Head>
 
       <div className="container mt-3">

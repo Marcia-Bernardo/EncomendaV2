@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 const ItemManager = ({ method, id }) => {
   const [saveName, setSaveName] = useState("");
   const [saveConfTime, setSaveConfTime] = useState("");
+  const [classAlert, setClassAlert] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const saveItem = async () => {
     const requestMetadata = {
@@ -25,18 +27,18 @@ const ItemManager = ({ method, id }) => {
     );
     const message = await response.json();
     if (message.error) {
-      return alert(
-        message.error.map((erro, index) => {
-          //   if (index == 0) {
-          //     return "";
-          //   }
-          return erro.msg + "\n";
-        })
-      );
+      setClassAlert("alert alert-danger alert-dismissible fade show");
+      const error = message.error.map((erro, index) => {
+        return <p>{erro.msg} </p>;
+      });
+      setAlertMessage(error);
+      return;
     }
-    alert(message);
+    // alert(message);
     setSaveConfTime("");
     setSaveName("");
+    setClassAlert("alert alert-success alert-dismissible fade show");
+    setAlertMessage("Item criado com sucesso!");
   };
 
   const getItem = async () => {
@@ -59,7 +61,7 @@ const ItemManager = ({ method, id }) => {
 
   return (
     <form>
-      <div className="form-group">
+      <div className="form-group ">
         <label htmlFor="exampleInputNomeItem">Nome: </label>
         <br />
         <input
@@ -87,6 +89,9 @@ const ItemManager = ({ method, id }) => {
           placeholder="Tempo"
         />
         <br />
+      </div>
+      <div className={classAlert} role="alert">
+        {alertMessage}
       </div>
       <div className="container ">
         <button

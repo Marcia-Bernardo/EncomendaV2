@@ -7,9 +7,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
 registerLocale("pt", pt);
 
-const TableRow = ({ order, products, map, showEdit, admin }) => {
+const TableRow = ({ order, products, map, showEdit, admin, getOrders }) => {
   const router = useRouter();
-  const changeStatus = async (id, itemName) => {
+  const changeItemStatus = async (id, itemName) => {
     const requestMetadata = {
       method: "PUT",
       credential: "same-origin",
@@ -21,10 +21,30 @@ const TableRow = ({ order, products, map, showEdit, admin }) => {
     };
 
     const response = await fetch(
-      `${process.env.BACKEND_URL}/api/order`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`,
       requestMetadata
     );
     await response.json();
+    getOrders();
+  };
+
+  const changeStatus = async (id, status) => {
+    const requestMetadata = {
+      method: "PUT",
+      credential: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, status }),
+    };
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orderStatus`,
+      requestMetadata
+    );
+    await response.json();
+    getOrders();
   };
 
   const deleteOrder = async (id) => {
@@ -45,6 +65,7 @@ const TableRow = ({ order, products, map, showEdit, admin }) => {
       requestMetadata
     );
     await response.json();
+    getOrders();
   };
   return (
     <tr key={order.id} align="center">
@@ -64,10 +85,10 @@ const TableRow = ({ order, products, map, showEdit, admin }) => {
             key={index}
             onClick={() => {
               // console.log(item.id, products[product].name);
-              changeStatus(order.id, products[product].name);
+              changeItemStatus(order.id, products[product].name);
             }}
           >
-            {map[products[product].name] || ""}
+            {map[products[product].name] && map[products[product].name][0]}
           </td>
         );
       })}
@@ -105,7 +126,7 @@ const TableRow = ({ order, products, map, showEdit, admin }) => {
             type="button"
             className="btn  btn-sm "
             onClick={() => {
-              router.push(`/listOrderPage`);
+              changeStatus(order.id, 2);
             }}
           >
             <Image src="/delivered.png" alt="me" width={40} height={43} />

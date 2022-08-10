@@ -8,21 +8,20 @@ const Form = ({ setOrder, order }) => {
   const [date, setDate] = useState();
 
   useEffect(() => {
-    console.log("date", order.date);
     if (order.date) {
       setDate(new Date(order.date));
     }
-  }, []);
+  }, date);
 
   return (
     <form>
       <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Cliente</label>
+        <label htmlFor="name">Cliente</label>
         <br />
         <input
           type="text"
           className="form-control"
-          id="exampleInputEmail1"
+          id="name"
           placeholder="Nome"
           value={order.name}
           onChange={(e) => {
@@ -32,7 +31,7 @@ const Form = ({ setOrder, order }) => {
       </div>
       <br />
       <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Data e hora de recolha</label>
+        <label htmlFor="data_hora">Data e hora de recolha</label>
         <br />
         <DatePicker
           placeholderText="Defina aqui"
@@ -40,6 +39,7 @@ const Form = ({ setOrder, order }) => {
           onChange={(newDate) => {
             console.log(newDate);
             setOrder({ ...order, date: newDate });
+            setDate(newDate);
           }}
           locale="pt"
           dateFormat="Pp"
@@ -52,11 +52,11 @@ const Form = ({ setOrder, order }) => {
       <br />
 
       <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Obs:</label>
+        <label htmlFor="obs">Obs:</label>
         <input
           type="text"
           className="form-control"
-          id="exampleInputPassword1"
+          id="obs"
           placeholder="Observação"
           value={order.obs}
           onChange={(e) => {
