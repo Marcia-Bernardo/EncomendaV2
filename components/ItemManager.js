@@ -29,7 +29,7 @@ const ItemManager = ({ method, id }) => {
     if (message.error) {
       setClassAlert("alert alert-danger alert-dismissible fade show");
       const error = message.error.map((erro, index) => {
-        return <p>{erro.msg} </p>;
+        return <p key={index}>{erro.msg} </p>;
       });
       setAlertMessage(error);
       return;

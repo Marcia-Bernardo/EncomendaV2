@@ -39,8 +39,8 @@ const OrderManager = ({ method, id }) => {
     if (message.error) {
       setClassAlert("alert alert-danger alert-dismissible fade show");
 
-      const error = message.error.map((erro) => {
-        return <p>{erro.msg}</p>;
+      const error = message.error.map((erro, index) => {
+        return <p key={index}>{erro.msg}</p>;
       });
       setAlertMessage(error);
       return;
