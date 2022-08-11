@@ -4,7 +4,7 @@ import TableRow from "./TableRow";
 
 const Table = ({ showEdit, date, combination }) => {
   const [data, setData] = useState([]);
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(false);
 
   const [products, setProducts] = useState([]);
   const getOrders = async () => {

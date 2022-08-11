@@ -57,7 +57,7 @@ const ItemManager = ({ method, id }) => {
     if (id) {
       getItem();
     }
-  }, []);
+  }, [id]);
 
   return (
     <form>

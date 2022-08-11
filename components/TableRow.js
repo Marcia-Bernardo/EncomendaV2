@@ -138,7 +138,7 @@ const TableRow = ({ order, products, map, showEdit, admin, getOrders }) => {
             type="button"
             className="btn  btn-sm "
             onClick={() => {
-              router.push(`/listOrderPage`);
+              changeStatus(order.id, 1);
             }}
           >
             <Image src="/ready.png" alt="me" width={20} height={20} />
