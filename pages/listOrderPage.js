@@ -10,7 +10,6 @@ const ListOrderPage = () => {
 
   return (
     <>
-    
       <Head>Listar Pedido</Head>
 
       <div className="container mt-3">
@@ -30,7 +29,7 @@ const ListOrderPage = () => {
           <ListDate setDateToFilter={setDateToFilter} />
         </div>
         <div className="mt-3">
-          <Table showEdit date={dateToFilter} />
+          <Table showEdit date={dateToFilter} link={"date"} />
         </div>
       </div>
     </>

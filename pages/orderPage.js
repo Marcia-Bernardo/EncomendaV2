@@ -37,7 +37,7 @@ const OrderPage = () => {
         </h2>
 
         <div className="mt-3">
-          <Table date={date} combination />
+          <Table link={"status"} combination />
         </div>
       </div>
     </>

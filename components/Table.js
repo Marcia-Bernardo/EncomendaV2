@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { getColIndex } from "../lib/utils";
 import TableRow from "./TableRow";
 
-const Table = ({ showEdit, date, combination }) => {
+const Table = ({ showEdit, date, combination, link }) => {
   const [data, setData] = useState([]);
   const [admin, setAdmin] = useState(false);
-
+  console.log(date);
   const [products, setProducts] = useState([]);
   const getOrders = async () => {
+    const statusNumber = admin ? 2 : 1;
+    const finalValue = date ? date : statusNumber;
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/all`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${link}/${finalValue}`
     );
 
     const orderData = await response.json();
