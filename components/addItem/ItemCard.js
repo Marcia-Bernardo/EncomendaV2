@@ -37,6 +37,19 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
                 </div>
               </div>
               <div className="panel-footer text-center">
+                <input
+                  type="text"
+                  className="form-control text-center"
+                  style={{ fontSize: "20px" }}
+                  id="quantidade"
+                  value={orderItems[name]}
+                  onChange={(e) => {
+                    setOrderItems({
+                      ...orderItems,
+                      [name]: e.target.value,
+                    });
+                  }}
+                />
                 <button
                   className="float-start btn btn-primary  mb-5"
                   onClick={() => {
@@ -61,8 +74,6 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
                 >
                   -
                 </button>
-
-                <span>{orderItems[name]}</span>
 
                 <button
                   className="float-end btn btn-warning  mb-5"

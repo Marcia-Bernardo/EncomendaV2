@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import Table from "../components/Table";
+import { useRouter } from "next/router";
 
 import DropdownAdmin from "../components/DropdownAdmin";
 
 const OrderPage = () => {
+  const router = useRouter();
   const [months] = useState([
     "Janeiro",
     "Fevereiro",
@@ -28,8 +30,18 @@ const OrderPage = () => {
         <title>Encomendas</title>
       </Head>
       <div className="container">
-        <div className="mt-2">
+        <div className="mt-2 float-end ">
           <DropdownAdmin />
+
+          <button
+            type="button"
+            className="btn btn-primary mx-3"
+            onClick={() => {
+              router.push("/addOrder");
+            }}
+          >
+            Criar pedido
+          </button>
         </div>
 
         <h2 className="mt-3">

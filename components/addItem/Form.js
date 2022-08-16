@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
+
 registerLocale("pt", pt);
 
 const Form = ({ setOrder, order }) => {
@@ -30,7 +31,7 @@ const Form = ({ setOrder, order }) => {
         />
       </div>
       <br />
-      <div className="form-group">
+      <div className="form-group" style={{ fontSize: "20px !important" }}>
         <label htmlFor="data_hora">Data e hora de recolha</label>
         <br />
         <DatePicker

@@ -10,7 +10,7 @@ const LoginPage = () => {
       </Head>
       <div
         className="container mt-3"
-        style={{ paddingRight: 500, "font-size": "20px" }}
+        style={{ paddingRight: 500, fontSize: "20px" }}
       >
         <h2>Entrar conta</h2>
         <Login />
