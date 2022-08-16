@@ -52,9 +52,7 @@ const Table = ({ showEdit, date, combination, link }) => {
           {Object.keys(products).map((key, index) => {
             return (
               <th key={index} scope="col">
-                {combination
-                  ? getColIndex(products[key].name)
-                  : products[key].name}
+                {products[key].name}
               </th>
             );
           })}
