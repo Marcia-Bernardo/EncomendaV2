@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const AddItem = () => {
   const router = useRouter();
   return (
-    <div className="container mt-3">
+    <div className="container mt-4">
       <Head>
         <title>Criar pedido</title>
       </Head>
@@ -20,7 +20,7 @@ const AddItem = () => {
         <img src="/back.png" alt="me" width="25" height="25" />
       </button>
 
-      <h2>Criar pedido</h2>
+      <h1>Criar pedido</h1>
 
       <OrderManager method="POST" />
     </div>

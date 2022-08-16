@@ -30,11 +30,12 @@ const OrderPage = () => {
       <Head>
         <title>Encomendas</title>
       </Head>
-      <div className="container">
+      <div className="container mt-4">
         <div className="mt-2 float-end ">
           <DropdownAdmin />
 
           <button
+            style={{ fontSize: "20px" }}
             type="button"
             className="btn btn-primary mx-3"
             onClick={() => {
@@ -45,10 +46,10 @@ const OrderPage = () => {
           </button>
         </div>
 
-        <h2 className="mt-3">
+        <h1 sclassName="mt-3">
           Encomendas do dia: {date.getDate()} {months[date.getMonth()]}
-        </h2>
-
+        </h1>
+        <br />
         <div className="mt-3">
           <Legend />
           <br />

@@ -65,6 +65,7 @@ const ItemManager = ({ method, id }) => {
         <label htmlFor="exampleInputNomeItem">Nome: </label>
         <br />
         <input
+          style={{ fontSize: "20px" }}
           type="text"
           className="form-control"
           id="exampleInputNomeItem"
@@ -79,6 +80,7 @@ const ItemManager = ({ method, id }) => {
       <div className="form-group">
         <label htmlFor="exampleInputTime">Tempo de preparo: </label>
         <input
+          style={{ fontSize: "20px" }}
           type="text"
           className="form-control"
           id="exampleInputTime"
@@ -100,6 +102,7 @@ const ItemManager = ({ method, id }) => {
             e.preventDefault();
             saveItem();
           }}
+          style={{ fontSize: "20px" }}
         >
           Enviar
         </button>

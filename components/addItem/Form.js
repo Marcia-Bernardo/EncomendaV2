@@ -20,6 +20,7 @@ const Form = ({ setOrder, order }) => {
         <label htmlFor="name">Cliente</label>
         <br />
         <input
+          style={{ fontSize: "20px" }}
           type="text"
           className="form-control"
           id="name"
@@ -58,6 +59,7 @@ const Form = ({ setOrder, order }) => {
           type="text"
           className="form-control"
           id="obs"
+          style={{ fontSize: "20px" }}
           placeholder="Observação"
           value={order.obs}
           onChange={(e) => {

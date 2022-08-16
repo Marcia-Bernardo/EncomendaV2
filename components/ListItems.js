@@ -40,7 +40,7 @@ const ListItems = () => {
 
   return (
     <div className="container">
-      <table className="table">
+      <table className="table" style={{ fontSize: "20px" }}>
         <thead>
           <tr>
             <th scope="col">Item</th>

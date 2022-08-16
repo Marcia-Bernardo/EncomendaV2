@@ -12,7 +12,7 @@ const ListOrderPage = () => {
     <>
       <Head>Listar Pedido</Head>
 
-      <div className="container mt-3">
+      <div className="container mt-4">
         <button
           type="button"
           className="float-end btn "
@@ -23,9 +23,9 @@ const ListOrderPage = () => {
           <img src="/back.png" alt="me" width="25" height="25" />
         </button>
 
-        <h2>Listar pedidos</h2>
+        <h1>Listar pedidos</h1>
 
-        <div>
+        <div className="mt-3">
           <ListDate setDateToFilter={setDateToFilter} />
         </div>
         <div className="mt-3">

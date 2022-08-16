@@ -7,11 +7,15 @@ const DropdownAdmin = () => {
   const router = useRouter();
   return (
     <Dropdown className="float-end">
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+      <Dropdown.Toggle
+        variant="secondary"
+        id="dropdown-basic"
+        style={{ fontSize: "20px" }}
+      >
         Administrar
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
+      <Dropdown.Menu style={{ fontSize: "20px" }}>
         <Dropdown.Item
           onClick={() => {
             router.push("/createItemPage");
