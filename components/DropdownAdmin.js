@@ -7,7 +7,7 @@ const DropdownAdmin = () => {
   const router = useRouter();
   return (
     <Dropdown className="float-end">
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
         Administrar
       </Dropdown.Toggle>
 

@@ -4,6 +4,7 @@ import Table from "../components/Table";
 import { useRouter } from "next/router";
 
 import DropdownAdmin from "../components/DropdownAdmin";
+import Legend from "../components/Legend";
 
 const OrderPage = () => {
   const router = useRouter();
@@ -49,6 +50,8 @@ const OrderPage = () => {
         </h2>
 
         <div className="mt-3">
+          <Legend />
+          <br />
           <Table link={"status"} combination />
         </div>
       </div>

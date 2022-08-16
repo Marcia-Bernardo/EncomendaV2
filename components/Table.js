@@ -8,7 +8,6 @@ const Table = ({ showEdit, date, combination, link }) => {
   console.log(date);
   const [products, setProducts] = useState([]);
   const getOrders = async () => {
-    console.log("foi");
     const statusNumber = admin ? 2 : 1;
     const finalValue = date ? date : statusNumber;
     const response = await fetch(
