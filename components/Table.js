@@ -45,7 +45,14 @@ const Table = ({ showEdit, date, combination, link }) => {
   }, [date]);
   return (
     <table className="table  table-bordered">
-      <thead className="table-dark">
+      <thead
+        className="table-dark"
+        style={{
+          position: "sticky",
+          zIndex: 100,
+          top: 0,
+        }}
+      >
         <tr align="center">
           <th scope="col">Nome</th>
           <th scope="col">Hora</th>
