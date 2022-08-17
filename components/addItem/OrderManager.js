@@ -11,6 +11,7 @@ const OrderManager = ({ method, id }) => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const sendRequest = async () => {
+    setLoading(true);
     const items = [];
 
     Object.keys(orderItems).map((key) => {
@@ -19,7 +20,6 @@ const OrderManager = ({ method, id }) => {
         qtd: orderItems[key],
       });
     });
-    console.log(clientData, items);
     const requestMetadata = {
       method: method,
       credential: "same-origin",
@@ -53,6 +53,7 @@ const OrderManager = ({ method, id }) => {
     setOrderItems({});
     setClassAlert("alert alert-success alert-dismissible fade show");
     setAlertMessage("Pedido criado com sucesso!");
+    setLoading(false);
   };
 
   const getOrder = async () => {
@@ -84,7 +85,7 @@ const OrderManager = ({ method, id }) => {
       getOrder();
     }
     setLoading(false);
-  }, []);
+  }, [orderItems, id]);
   if (loading) {
     return <h1>Loading</h1>;
   }

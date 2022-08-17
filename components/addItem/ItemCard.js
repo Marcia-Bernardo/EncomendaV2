@@ -14,26 +14,26 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
   useEffect(() => {
     getItem();
   }, []);
-
+  console.log(orderItems);
   return (
     <div className="container mt-5">
       <div className="row">
         {items.map((item) => {
-          const name = item.name;
+          const { name, id, confetionTime } = item;
           return (
-            <div className="col-4" key={item.id}>
+            <div className="col-4" key={id}>
               <div className="card-deck">
                 <div className="card">
                   {/* <img className="card-img-top" src="..." alt="Card image cap" /> */}
                   <div className="card-body">
-                    <h4 className="card-title text-center">{item.name} </h4>
+                    <h4 className="card-title text-center">{name} </h4>
 
                     <p className="card-text">
                       <small
                         className="text-muted"
                         style={{ fontSize: "20px" }}
                       >
-                        Tempo de preparo: {item.confetionTime} min
+                        Tempo de preparo: {confetionTime} min
                       </small>
                     </p>
                   </div>
@@ -51,6 +51,9 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
                       ...orderItems,
                       [name]: e.target.value,
                     });
+                    Array.from(document.querySelectorAll("input")).forEach(
+                      (input) => (input.value = "")
+                    );
                   }}
                 />
                 <button
