@@ -68,8 +68,11 @@ const TableRow = ({ order, products, map, showEdit, admin, getOrders }) => {
     getOrders();
   };
   return (
-    <tr key={order.id} align="center">
-      <td>{order.name}</td>
+    <tr
+      key={order.id}
+      align="center"
+      style={{ fontWeight: "bold", fontSize: "1.3em" }}
+    >
       <td>{getHour(order.date)}</td>
 
       {Object.keys(products).map((product, index) => {
@@ -93,8 +96,11 @@ const TableRow = ({ order, products, map, showEdit, admin, getOrders }) => {
         );
       })}
 
-      <td> {order.obs || ""}</td>
-
+      <td style={{ fontWeight: "normal", fontSize: "0.8em" }}>
+        {" "}
+        {order.obs || ""}
+      </td>
+      <td style={{ fontWeight: "normal", fontSize: "0.8em" }}>{order.name}</td>
       {showEdit ? (
         <>
           <td>

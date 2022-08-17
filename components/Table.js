@@ -54,7 +54,6 @@ const Table = ({ showEdit, date, combination, link }) => {
         }}
       >
         <tr align="center">
-          <th scope="col">Nome</th>
           <th scope="col">Hora</th>
           {Object.keys(products).map((key, index) => {
             return (
@@ -64,7 +63,7 @@ const Table = ({ showEdit, date, combination, link }) => {
             );
           })}
           <th>OBS</th>
-
+          <th scope="col">Nome</th>
           {/* <th>PRONTO</th> */}
           {showEdit ? (
             <>
