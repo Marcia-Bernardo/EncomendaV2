@@ -46,7 +46,7 @@ const OrderPage = () => {
           </button>
         </div>
 
-        <h1 sclassName="mt-3">
+        <h1 className="mt-3">
           Encomendas do dia: {date.getDate()} {months[date.getMonth()]}
         </h1>
         <br />

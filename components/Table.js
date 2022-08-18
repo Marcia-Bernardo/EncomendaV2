@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { getColIndex } from "../lib/utils";
 import TableRow from "./TableRow";
 
-const Table = ({ showEdit, date, combination, link }) => {
+const Table = ({ showEdit, date, link }) => {
   const [data, setData] = useState([]);
   const [admin, setAdmin] = useState(true);
-  console.log(date);
+
   const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState({});
   const getOrders = async () => {
     const statusNumber = admin ? 2 : 1;
     const finalValue = date ? date : statusNumber;
@@ -16,12 +17,22 @@ const Table = ({ showEdit, date, combination, link }) => {
 
     const orderData = await response.json();
 
-    const filteredResults = orderData.filter((order) => {
-      order.items.map((item) => {});
-      return order;
+    // const filteredResults = orderData.filter((order) => {
+    //   order.items.map((item) => {});
+    //   return order;
+    // })
+    const count = {};
+    orderData.forEach((order) => {
+      order.items.forEach((item) => {
+        if (!count[item.item]) {
+          count[item.item] = 0;
+        }
+        count[item.item] = count[item.item] + parseFloat(item.qtd);
+      });
     });
+    setTotal(count);
 
-    return setData(filteredResults);
+    return setData(orderData);
   };
   const getProducts = async () => {
     const response = await fetch(
@@ -56,11 +67,13 @@ const Table = ({ showEdit, date, combination, link }) => {
         <tr align="center">
           <th scope="col">Hora</th>
           {Object.keys(products).map((key, index) => {
-            return (
-              <th key={index} scope="col">
-                {products[key].name}
-              </th>
-            );
+            if (total[products[key].name]) {
+              return (
+                <th key={index} scope="col">
+                  {products[key].name}
+                </th>
+              );
+            }
           })}
           <th>OBS</th>
           <th scope="col">Nome</th>
@@ -94,11 +107,19 @@ const Table = ({ showEdit, date, combination, link }) => {
               showEdit={showEdit}
               admin={admin}
               getOrders={getOrders}
+              total={total}
             />
           );
         })}
       </tbody>
-      <tfoot></tfoot>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          {Object.keys(total).map((key, index) => {
+            return <td key={index}>{total[key]}</td>;
+          })}
+        </tr>
+      </tfoot>
     </table>
   );
 };

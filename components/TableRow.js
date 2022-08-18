@@ -7,7 +7,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
 registerLocale("pt", pt);
 
-const TableRow = ({ order, products, map, showEdit, admin, getOrders }) => {
+const TableRow = ({
+  order,
+  products,
+  map,
+  showEdit,
+  admin,
+  getOrders,
+  total,
+}) => {
   const router = useRouter();
   const changeItemStatus = async (id, itemName) => {
     const requestMetadata = {
@@ -76,24 +84,27 @@ const TableRow = ({ order, products, map, showEdit, admin, getOrders }) => {
       <td>{getHour(order.date)}</td>
 
       {Object.keys(products).map((product, index) => {
-        return (
-          <td
-            style={{
-              backgroundColor: compareDates(
-                order.date,
-                products[product],
-                map[products[product].name] || 0
-              ),
-            }}
-            key={index}
-            onClick={() => {
-              // console.log(item.id, products[product].name);
-              changeItemStatus(order.id, products[product].name);
-            }}
-          >
-            {map[products[product].name] && map[products[product].name][0]}
-          </td>
-        );
+        console.log(products[product].name);
+        if (total[products[product].name]) {
+          return (
+            <td
+              style={{
+                backgroundColor: compareDates(
+                  order.date,
+                  products[product],
+                  map[products[product].name] || 0
+                ),
+              }}
+              key={index}
+              onClick={() => {
+                // console.log(item.id, products[product].name);
+                changeItemStatus(order.id, products[product].name);
+              }}
+            >
+              {map[products[product].name] && map[products[product].name][0]}
+            </td>
+          );
+        }
       })}
 
       <td style={{ fontWeight: "normal", fontSize: "0.8em" }}>
