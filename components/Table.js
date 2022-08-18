@@ -31,7 +31,7 @@ const Table = ({ showEdit, date, link }) => {
       });
     });
     setTotal(count);
-
+    console.log(count);
     return setData(orderData);
   };
   const getProducts = async () => {
@@ -115,8 +115,10 @@ const Table = ({ showEdit, date, link }) => {
       <tfoot>
         <tr>
           <td>Total</td>
-          {Object.keys(total).map((key, index) => {
-            return <td key={index}>{total[key]}</td>;
+          {products.map((key, index) => {
+            if (total[key.name]) {
+              return <td key={index}>{total[key.name]}</td>;
+            }
           })}
         </tr>
       </tfoot>

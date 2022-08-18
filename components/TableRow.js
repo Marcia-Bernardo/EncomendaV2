@@ -84,7 +84,7 @@ const TableRow = ({
       <td>{getHour(order.date)}</td>
 
       {Object.keys(products).map((product, index) => {
-        console.log(products[product].name);
+        // console.log(products[product].name);
         if (total[products[product].name]) {
           return (
             <td
