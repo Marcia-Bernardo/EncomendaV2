@@ -43,6 +43,7 @@ const OrderManager = ({ method, id }) => {
         return <p key={index}>{erro.msg}</p>;
       });
       setAlertMessage(error);
+      setLoading(false);
       return;
     }
     setClientData({
@@ -53,6 +54,10 @@ const OrderManager = ({ method, id }) => {
     setOrderItems({});
     setClassAlert("alert alert-success alert-dismissible fade show");
     setAlertMessage("Pedido criado com sucesso!");
+    setTimeout(() => {
+      setClassAlert("");
+      setAlertMessage("");
+    }, 2500);
     setLoading(false);
   };
 

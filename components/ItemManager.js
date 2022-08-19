@@ -39,6 +39,11 @@ const ItemManager = ({ method, id }) => {
     setSaveName("");
     setClassAlert("alert alert-success alert-dismissible fade show");
     setAlertMessage("Item criado com sucesso!");
+    setTimeout(() => {
+      console.log("ola");
+      setClassAlert("");
+      setAlertMessage("");
+    }, 2500);
   };
 
   const getItem = async () => {
