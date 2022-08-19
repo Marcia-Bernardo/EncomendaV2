@@ -8,6 +8,7 @@ const Table = ({ showEdit, date, link }) => {
 
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState({});
+
   const getOrders = async () => {
     const statusNumber = admin ? 2 : 1;
     const finalValue = date ? date : statusNumber;
@@ -20,7 +21,7 @@ const Table = ({ showEdit, date, link }) => {
     // const filteredResults = orderData.filter((order) => {
     //   order.items.map((item) => {});
     //   return order;
-    // })
+    // });
     const count = {};
     orderData.forEach((order) => {
       order.items.forEach((item) => {
@@ -31,7 +32,6 @@ const Table = ({ showEdit, date, link }) => {
       });
     });
     setTotal(count);
-    console.log(count);
     return setData(orderData);
   };
   const getProducts = async () => {
@@ -92,6 +92,7 @@ const Table = ({ showEdit, date, link }) => {
       </thead>
       <tbody>
         {data.map((order) => {
+          // console.log(order);
           const map = {};
           order.items.map((displayItem) => {
             map[displayItem.item] = [displayItem.qtd, displayItem.status];

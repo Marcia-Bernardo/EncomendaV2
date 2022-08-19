@@ -22,7 +22,7 @@ const AddItem = () => {
 
       <h1>Criar pedido</h1>
 
-      <OrderManager method="POST" />
+      <OrderManager method="POST" link="order" />
     </div>
   );
 };

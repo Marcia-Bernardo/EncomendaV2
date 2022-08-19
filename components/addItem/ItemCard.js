@@ -14,7 +14,6 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
   useEffect(() => {
     getItem();
   }, []);
-  console.log(orderItems);
   return (
     <div className="container mt-5">
       <div className="row">

@@ -12,7 +12,6 @@ const ListCards = ({ order }) => {
         </thead>
         <tbody>
           {Object.keys(order).map((key, index) => {
-            console.log(key, order);
             return (
               <tr key={index}>
                 <th scope="row">{key}</th>

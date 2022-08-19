@@ -21,7 +21,7 @@ const UpdateOrderPage = () => {
           <Image src="/back.png" alt="me" width="25" height="25" />
         </button>
         <h2>Editar item</h2>
-        <OrderManager method="PUT" id={router.query.id} />
+        <OrderManager method="PUT" id={router.query.id} link="orderUpdate" />
       </div>
     </>
   );

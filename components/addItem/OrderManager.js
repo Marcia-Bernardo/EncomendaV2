@@ -3,7 +3,7 @@ import Form from "./Form";
 import ItemCard from "./ItemCard";
 import ListCards from "./ListCards";
 
-const OrderManager = ({ method, id }) => {
+const OrderManager = ({ method, id, link }) => {
   const [clientData, setClientData] = useState({});
   const [orderItems, setOrderItems] = useState({});
   const [loading, setLoading] = useState(true);
@@ -20,6 +20,7 @@ const OrderManager = ({ method, id }) => {
         qtd: orderItems[key],
       });
     });
+    console.log(JSON.stringify({ ...clientData, items }));
     const requestMetadata = {
       method: method,
       credential: "same-origin",
@@ -27,15 +28,16 @@ const OrderManager = ({ method, id }) => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...clientData, items }),
+      body: JSON.stringify({ ...clientData, items, id }),
     };
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${link}`,
       requestMetadata
     );
 
     const message = await response.json();
+    console.log(message);
     if (message.error) {
       setClassAlert("alert alert-danger alert-dismissible fade show");
 
@@ -66,7 +68,6 @@ const OrderManager = ({ method, id }) => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order/${id}`
     );
     const newData = await response.json();
-
     if (newData) {
       setClientData({
         name: newData.name,
@@ -75,11 +76,10 @@ const OrderManager = ({ method, id }) => {
       });
       const items = newData.items.map((item) => {
         const newItem = {};
-        newItem[item.item] = parseInt(item.qtd);
+        newItem[item.item] = parseFloat(item.qtd);
 
         return newItem;
       });
-      console.log(items);
       setOrderItems(Object.assign({}, ...items));
     }
     setLoading(false);
@@ -90,7 +90,7 @@ const OrderManager = ({ method, id }) => {
       getOrder();
     }
     setLoading(false);
-  }, [orderItems, id]);
+  }, []);
   if (loading) {
     return <h1>Loading</h1>;
   }

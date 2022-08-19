@@ -12,7 +12,7 @@ const Form = ({ setOrder, order }) => {
     if (order.date) {
       setDate(new Date(order.date));
     }
-  }, date);
+  }, [order.date]);
 
   return (
     <form>
@@ -39,7 +39,6 @@ const Form = ({ setOrder, order }) => {
           placeholderText="Defina aqui"
           selected={date}
           onChange={(newDate) => {
-            console.log(newDate);
             setOrder({ ...order, date: newDate });
             setDate(newDate);
           }}
