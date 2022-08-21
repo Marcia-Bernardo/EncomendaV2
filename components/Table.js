@@ -114,7 +114,7 @@ const Table = ({ showEdit, date, link }) => {
         })}
       </tbody>
       <tfoot>
-        <tr>
+        <tr align="center" style={{ fontWeight: "bold", fontSize: "1.3em" }}>
           <td>Total</td>
           {products.map((key, index) => {
             if (total[key.name]) {
