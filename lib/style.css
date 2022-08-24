@@ -1,6 +1,6 @@
 .react-datepicker-popper{
   z-index: 100 !important;
-  width: 800px !important;
+  /* width: 800px !important; */
 
 }  
 .react-datepicker__current-month{
@@ -16,15 +16,19 @@
 
  .react-datepicker__month-container{
   width: 500px !important;
-  height: 350px !important;
+  height: 400px !important;
+  
 }
 .react-datepicker__day-name {
     margin-right:30px !important;
     width: 1em;
+  
+    
 }
 
 .react-datepicker__week div{
   width: 3.5rem !important;
+  line-height: 3rem !important;
 } 
 
 .react-datepicker__time-box{
@@ -42,3 +46,4 @@
 .react-datepicker__navigation--next--with-time{
   right: 120px !important;
 }
+
