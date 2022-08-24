@@ -1,10 +1,13 @@
 import "bootstrap/dist/css/bootstrap.css";
-
+import { AppWrapper } from "../lib/AppWrapper";
+import "../lib/style.css";
 function MyApp({ Component, pageProps }) {
   return (
-    <div style={{ fontSize: "20px" }}>
-      <Component {...pageProps} />
-    </div>
+    <AppWrapper>
+      <div style={{ fontSize: "20px" }}>
+        <Component {...pageProps} />
+      </div>
+    </AppWrapper>
   );
 }
 

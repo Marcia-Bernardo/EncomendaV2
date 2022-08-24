@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { getColIndex } from "../lib/utils";
 import TableRow from "./TableRow";
 
-const Table = ({ showEdit, date, link }) => {
+const Table = ({ showEdit, date, link, isAdmin }) => {
   const [data, setData] = useState([]);
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(isAdmin);
 
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState({});
@@ -60,7 +59,7 @@ const Table = ({ showEdit, date, link }) => {
         className="table-dark"
         style={{
           position: "sticky",
-          zIndex: 100,
+          zIndex: 10,
           top: 0,
         }}
       >

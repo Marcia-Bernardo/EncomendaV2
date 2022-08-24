@@ -21,6 +21,9 @@ const ListDate = ({ setDateToFilter }) => {
         dateFormat="P"
         timeFormat="p"
         timeIntervals={5}
+        onFocus={(e) => {
+          e.currentTarget.blur();
+        }}
       />
     </div>
   );

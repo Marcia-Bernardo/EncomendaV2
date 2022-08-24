@@ -47,6 +47,9 @@ const Form = ({ setOrder, order }) => {
           showTimeSelect
           timeFormat="p"
           timeIntervals={5}
+          onFocus={(e) => {
+            e.currentTarget.blur();
+          }}
         />
       </div>
 

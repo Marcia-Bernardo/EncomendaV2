@@ -31,13 +31,7 @@ const DropdownAdmin = () => {
         >
           Listar item
         </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => {
-            router.push("/addOrder");
-          }}
-        >
-          Criar pedido
-        </Dropdown.Item>
+
         <Dropdown.Item
           onClick={() => {
             router.push("/listOrderPage");

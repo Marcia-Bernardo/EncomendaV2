@@ -8,10 +8,7 @@ const LoginPage = () => {
       <Head>
         <title>Logar</title>
       </Head>
-      <div
-        className="container mt-3"
-        style={{ paddingRight: 500, fontSize: "20px" }}
-      >
+      <div className="container mt-3" style={{ fontSize: "20px" }}>
         <h2>Entrar conta</h2>
         <Login />
       </div>

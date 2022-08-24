@@ -1,9 +1,25 @@
 import Head from "next/head";
 import ItemManager from "../components/ItemManager";
 import { useRouter } from "next/router";
+import { UserContext } from "../lib/AppWrapper";
+import { useContext, useEffect, useState } from "react";
 
 const UpdateItemPage = () => {
   const router = useRouter();
+  const { user, loading } = useContext(UserContext);
+
+  if (loading) {
+    return;
+  }
+  if (!loading) {
+    if (!user) {
+      router.push("/");
+    }
+    if (user.permission != "admin") {
+      router.push("/orderPage");
+    }
+  }
+
   return (
     <>
       <Head>
@@ -14,7 +30,7 @@ const UpdateItemPage = () => {
           type="button"
           className="float-end btn "
           onClick={() => {
-            router.push("/orderPage");
+            router.push("/listItemsPage");
           }}
         >
           <img src="/back.png" alt="me" width="25" height="25" />

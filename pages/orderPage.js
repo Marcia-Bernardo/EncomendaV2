@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import Table from "../components/Table";
 import { useRouter } from "next/router";
 
 import DropdownAdmin from "../components/DropdownAdmin";
 import Legend from "../components/Legend";
+import { UserContext } from "../lib/AppWrapper"; //
 
 const OrderPage = () => {
   const router = useRouter();
@@ -24,6 +25,16 @@ const OrderPage = () => {
   ]);
 
   const [date] = useState(new Date());
+  const { user, loading } = useContext(UserContext); //
+
+  if (loading) {
+    return;
+  }
+  if (!loading) {
+    if (!user) {
+      router.push("/");
+    }
+  }
 
   return (
     <>
@@ -32,18 +43,21 @@ const OrderPage = () => {
       </Head>
       <div className="container mt-4">
         <div className="mt-2 float-end ">
-          <DropdownAdmin />
-
-          <button
-            style={{ fontSize: "20px" }}
-            type="button"
-            className="btn btn-primary mx-3"
-            onClick={() => {
-              router.push("/addOrder");
-            }}
-          >
-            Criar pedido
-          </button>
+          {user.permission === "admin" && (
+            <>
+              <DropdownAdmin />
+              <button
+                style={{ fontSize: "20px" }}
+                type="button"
+                className="btn btn-primary mx-3"
+                onClick={() => {
+                  router.push("/addOrder");
+                }}
+              >
+                Criar pedido
+              </button>
+            </>
+          )}
         </div>
 
         <h1 className="mt-3">
@@ -53,7 +67,11 @@ const OrderPage = () => {
         <div className="mt-3">
           <Legend />
           <br />
-          <Table link={"status"} combination />
+          <Table
+            link={"status"}
+            combination
+            isAdmin={user.permission === "admin"}
+          />
         </div>
       </div>
     </>

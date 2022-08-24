@@ -2,8 +2,24 @@ import OrderManager from "../components/addItem/OrderManager";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { UserContext } from "../lib/AppWrapper";
+import { useContext } from "react";
+
 const UpdateOrderPage = () => {
   const router = useRouter();
+  const { user, loading } = useContext(UserContext); //
+
+  if (loading) {
+    return;
+  }
+  if (!loading) {
+    if (!user) {
+      router.push("/");
+    }
+    if (user.permission != "admin") {
+      router.push("/orderPage");
+    }
+  }
   return (
     <>
       <Head>
@@ -15,7 +31,7 @@ const UpdateOrderPage = () => {
           type="button"
           className="float-end btn "
           onClick={() => {
-            router.push("/orderPage");
+            router.push("/listOrderPage");
           }}
         >
           <Image src="/back.png" alt="me" width="25" height="25" />

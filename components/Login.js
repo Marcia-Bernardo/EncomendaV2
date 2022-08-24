@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Cookies from "js-cookie";
 import { Router } from "react-router";
 import { useRouter } from "next/router";
+import { UserContext } from "../lib/AppWrapper";
 
 const Login = () => {
   const router = useRouter();
   const [username, setName] = useState();
   const [password, setPassword] = useState();
+  const { user, setUser } = useContext(UserContext);
 
   const sendRequest = async () => {
     const requestMetadata = {
@@ -39,7 +41,8 @@ const Login = () => {
         path: "",
         expires: 1000 * 24 * 365 * 60 * 60, // 1 year cookie
       });
-
+      setUser({ ...message.user });
+      localStorage.setItem("user", JSON.stringify({ ...message.user }));
       router.push("/orderPage");
     }
     // alert(message);

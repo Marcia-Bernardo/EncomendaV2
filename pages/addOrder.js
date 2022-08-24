@@ -1,9 +1,23 @@
 import Head from "next/head";
 import OrderManager from "../components/addItem/OrderManager";
 import { useRouter } from "next/router";
-
+import { UserContext } from "../lib/AppWrapper";
+import { useContext } from "react";
 const AddItem = () => {
   const router = useRouter();
+  const { user, loading } = useContext(UserContext); //
+
+  if (loading) {
+    return;
+  }
+  if (!loading) {
+    if (!user) {
+      router.push("/");
+    }
+    if (user.permission != "admin") {
+      router.push("/orderPage");
+    }
+  }
   return (
     <div className="container mt-4">
       <Head>

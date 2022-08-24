@@ -44,19 +44,17 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
                   className="form-control text-center"
                   style={{ fontSize: "20px" }}
                   id="quantidade"
-                  value={orderItems[name]}
+                  value={orderItems[name] || ""}
                   onChange={(e) => {
                     setOrderItems({
                       ...orderItems,
                       [name]: e.target.value,
                     });
-                    Array.from(document.querySelectorAll("input")).forEach(
-                      (input) => (input.value = "")
-                    );
                   }}
                 />
                 <button
                   className="float-start btn btn-primary  mb-5"
+                  style={{ fontWeight: "bold", fontSize: "1.3em" }}
                   onClick={() => {
                     if (orderItems[name] - 0.5 == 0) {
                       const newOrder = {
@@ -82,6 +80,7 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
 
                 <button
                   className="float-end btn btn-warning  mb-5"
+                  style={{ fontWeight: "bold", fontSize: "1.3em" }}
                   onClick={() =>
                     setOrderItems({
                       ...orderItems,

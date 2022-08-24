@@ -1,10 +1,23 @@
 import Head from "next/head";
 import ListItems from "../components/ListItems";
 import { useRouter } from "next/router";
-
+import { UserContext } from "../lib/AppWrapper";
+import { useContext } from "react";
 const ListItemsPage = () => {
   const router = useRouter();
+  const { user, loading } = useContext(UserContext); //
 
+  if (loading) {
+    return;
+  }
+  if (!loading) {
+    if (!user) {
+      router.push("/");
+    }
+    if (user.permission != "admin") {
+      router.push("/orderPage");
+    }
+  }
   return (
     <>
       <Head>Listar Itens</Head>
