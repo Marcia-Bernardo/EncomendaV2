@@ -75,7 +75,7 @@ const Table = ({ showEdit, date, link, isAdmin }) => {
           {showEdit ? (
             <>
               <th>Editar</th>
-              <th>Deletar</th>
+              <th>Remover</th>
             </>
           ) : admin ? (
             link == "status" ? (
