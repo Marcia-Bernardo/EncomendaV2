@@ -93,10 +93,10 @@ const ListItems = () => {
           <tr>
             <th scope="col">Item</th>
             <th scope="col">Tempo</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Editar</th>
+            <th scope="col">Remover</th>
+            <th scope="col">Subir Item</th>
+            <th scope="col">Descer Item</th>
           </tr>
         </thead>
         <tbody>
