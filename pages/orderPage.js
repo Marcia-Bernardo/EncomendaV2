@@ -26,6 +26,7 @@ const OrderPage = () => {
 
   const [date] = useState(new Date());
   const { user, loading } = useContext(UserContext); //
+  const [isUniqueStatus, setIsUniqueStatus] = useState(false);
 
   if (loading) {
     return;
@@ -43,9 +44,24 @@ const OrderPage = () => {
       </Head>
       <div className="container mt-4">
         <div className="mt-2 float-end ">
-          {user.permission === "admin" && (
+          <button
+            style={{ fontSize: "20px" }}
+            type="button"
+            className="btn btn-success mx-3"
+            onClick={() => {
+              setIsUniqueStatus(!isUniqueStatus);
+            }}
+          >
+            {isUniqueStatus
+              ? "Listar Encomendas"
+              : `Listar ${
+                  user && user.permission === "admin" ? "entrega" : "prontos"
+                }`}
+          </button>
+          <DropdownAdmin isAdmin={user && user.permission === "admin"} />
+          {user && user.permission === "admin" && (
             <>
-              <DropdownAdmin />
+              {" "}
               <button
                 style={{ fontSize: "20px" }}
                 type="button"
@@ -61,16 +77,21 @@ const OrderPage = () => {
         </div>
 
         <h1 className="mt-3">
-          Encomendas do dia: {date.getDate()} {months[date.getMonth()]}
+          {isUniqueStatus
+            ? user.permission == "admin"
+              ? "Listar Entregues"
+              : "Listar Prontos"
+            : "Encomendas do dia"}
+          : {date.getDate()} {months[date.getMonth()]}
         </h1>
         <br />
         <div className="mt-3">
           <Legend />
           <br />
           <Table
-            link={"status"}
+            link={isUniqueStatus ? "uniqueStatus" : "status"}
             combination
-            isAdmin={user.permission === "admin"}
+            isAdmin={user && user.permission === "admin"}
           />
         </div>
       </div>

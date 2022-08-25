@@ -38,7 +38,9 @@ const ItemManager = ({ method, id }) => {
     setSaveConfTime("");
     setSaveName("");
     setClassAlert("alert alert-success alert-dismissible fade show");
-    setAlertMessage("Item criado com sucesso!");
+    setAlertMessage(
+      `Item ${method == "PUT" ? "atualizado" : "criado"} com sucesso!`
+    );
     setTimeout(() => {
       setClassAlert("");
       setAlertMessage("");
@@ -82,17 +84,19 @@ const ItemManager = ({ method, id }) => {
       </div>
       <br />
       <div className="form-group">
-        <label htmlFor="exampleInputTime">Tempo de preparo: </label>
+        <label htmlFor="exampleInputTime">Tempo de preparo (minutos): </label>
         <input
           style={{ fontSize: "20px" }}
           type="text"
           className="form-control"
           id="exampleInputTime"
           onChange={(e) => {
-            setSaveConfTime(e.target.value);
+            const finalValue = e.target.value.match(/\d*/g)[0];
+            console.log(finalValue);
+            setSaveConfTime(finalValue);
           }}
           value={saveConfTime}
-          placeholder="Tempo"
+          placeholder="Tempo (minutos)"
         />
         <br />
       </div>

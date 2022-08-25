@@ -55,7 +55,9 @@ const OrderManager = ({ method, id, link }) => {
     });
     setOrderItems({});
     setClassAlert("alert alert-success alert-dismissible fade show");
-    setAlertMessage("Pedido criado com sucesso!");
+    setAlertMessage(
+      `Pedido ${method == "PUT" ? "atualizado" : "criado"}  com sucesso!`
+    );
     setTimeout(() => {
       setClassAlert("");
       setAlertMessage("");

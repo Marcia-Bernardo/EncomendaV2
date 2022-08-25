@@ -16,11 +16,6 @@ const Table = ({ showEdit, date, link, isAdmin }) => {
     );
 
     const orderData = await response.json();
-
-    // const filteredResults = orderData.filter((order) => {
-    //   order.items.map((item) => {});
-    //   return order;
-    // });
     const count = {};
     orderData.forEach((order) => {
       order.items.forEach((item) => {
@@ -52,7 +47,7 @@ const Table = ({ showEdit, date, link, isAdmin }) => {
     getOrders();
     const timer = setInterval(getOrders, 1000 * 60 * 0.5);
     return () => clearInterval(timer);
-  }, [date]);
+  }, [date, link]);
   return (
     <table className="table  table-bordered">
       <thead
@@ -83,9 +78,15 @@ const Table = ({ showEdit, date, link, isAdmin }) => {
               <th>Deletar</th>
             </>
           ) : admin ? (
-            <th>Entregue</th>
-          ) : (
+            link == "status" ? (
+              <th>Entregue</th>
+            ) : (
+              <th>Não entregue</th>
+            )
+          ) : link == "status" ? (
             <th>Pronto</th>
+          ) : (
+            <th>Não pronto</th>
           )}
         </tr>
       </thead>
@@ -108,6 +109,7 @@ const Table = ({ showEdit, date, link, isAdmin }) => {
               admin={admin}
               getOrders={getOrders}
               total={total}
+              isUnique={link == "uniqueStatus"}
             />
           );
         })}

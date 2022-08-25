@@ -14,7 +14,7 @@ const AddItem = () => {
     if (!user) {
       router.push("/");
     }
-    if (user.permission != "admin") {
+    if (user && user.permission != "admin") {
       router.push("/orderPage");
     }
   }

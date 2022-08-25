@@ -15,6 +15,7 @@ const TableRow = ({
   admin,
   getOrders,
   total,
+  isUnique,
 }) => {
   const router = useRouter();
   const changeItemStatus = async (id, itemName) => {
@@ -138,15 +139,41 @@ const TableRow = ({
           </td>
         </>
       ) : admin ? (
+        isUnique ? (
+          <td>
+            <button
+              type="button"
+              className="btn  btn-sm "
+              onClick={() => {
+                changeStatus(order.id, 1);
+              }}
+            >
+              <Image src="/not_delivered.png" alt="me" width={40} height={43} />
+            </button>
+          </td>
+        ) : (
+          <td>
+            <button
+              type="button"
+              className="btn  btn-sm "
+              onClick={() => {
+                changeStatus(order.id, 2);
+              }}
+            >
+              <Image src="/delivered.png" alt="me" width={40} height={43} />
+            </button>
+          </td>
+        )
+      ) : isUnique ? (
         <td>
           <button
             type="button"
             className="btn  btn-sm "
             onClick={() => {
-              changeStatus(order.id, 2);
+              changeStatus(order.id, 0);
             }}
           >
-            <Image src="/delivered.png" alt="me" width={40} height={43} />
+            <Image src="/not_ready.png" alt="me" width={40} height={43} />
           </button>
         </td>
       ) : (

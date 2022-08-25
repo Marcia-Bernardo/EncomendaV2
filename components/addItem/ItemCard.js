@@ -46,10 +46,14 @@ const ItemCard = ({ orderItems, setOrderItems }) => {
                   id="quantidade"
                   value={orderItems[name] || ""}
                   onChange={(e) => {
-                    setOrderItems({
-                      ...orderItems,
-                      [name]: e.target.value,
-                    });
+                    const match = /\d*(\.5)?/g.test(e.target.value);
+                    const finalValue = e.target.value.match(/\d*(\.)?5?/)[0];
+                    if (match) {
+                      setOrderItems({
+                        ...orderItems,
+                        [name]: finalValue,
+                      });
+                    }
                   }}
                 />
                 <button
