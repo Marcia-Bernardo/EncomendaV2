@@ -100,12 +100,10 @@ const ListItems = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => {
+          {items.map((item) => {
             return (
               <tr key={item.id}>
-                <td>
-                  {item.name} {index}
-                </td>
+                <td>{item.name}</td>
                 <td>{item.confetionTime} min</td>
 
                 <td>
