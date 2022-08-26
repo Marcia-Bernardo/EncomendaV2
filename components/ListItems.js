@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Cookies from "js-cookie";
 const ListItems = () => {
   const [items, setItems] = useState([]);
   const [classAlert, setClassAlert] = useState("");
@@ -18,12 +19,14 @@ const ListItems = () => {
   }, []);
 
   const deleteItem = async (id) => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: "DELETE",
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({
         id,
@@ -34,18 +37,19 @@ const ListItems = () => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/item`,
       requestMetadata
     );
-    const res = await response.json();
-    console.log(res);
+    await response.json();
 
     listAllItems();
   };
   const updateItem = async (number, direction) => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: "PUT",
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({
         number,
@@ -58,7 +62,6 @@ const ListItems = () => {
       requestMetadata
     );
     const message = await response.json();
-    console.log(message);
     if (message.error) {
       setClassAlert("alert alert-danger alert-dismissible fade show");
 
@@ -120,7 +123,13 @@ const ListItems = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() => {
-                      deleteItem(item.id);
+                      if (
+                        confirm(
+                          `Tem a certeza que pretende remover o item ${item.name}`
+                        )
+                      ) {
+                        deleteItem(item.id);
+                      }
                     }}
                   >
                     Remover

@@ -5,6 +5,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { useRouter } from "next/router";
 import "react-datepicker/dist/react-datepicker.css";
 import pt from "date-fns/locale/pt";
+import Cookies from "js-cookie";
 registerLocale("pt", pt);
 
 const TableRow = ({
@@ -19,18 +20,20 @@ const TableRow = ({
 }) => {
   const router = useRouter();
   const changeItemStatus = async (id, itemName) => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: "PUT",
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({ id, itemName }),
     };
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/order`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/statusItemOrder`,
       requestMetadata
     );
     await response.json();
@@ -38,12 +41,14 @@ const TableRow = ({
   };
 
   const changeStatus = async (id, status) => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: "PUT",
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({ id, status }),
     };
@@ -57,12 +62,14 @@ const TableRow = ({
   };
 
   const deleteOrder = async (id) => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: "DELETE",
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({
         id,
@@ -85,7 +92,6 @@ const TableRow = ({
       <td>{getHour(order.date)}</td>
 
       {Object.keys(products).map((product, index) => {
-        // console.log(products[product].name);
         if (total[products[product].name]) {
           return (
             <td
@@ -98,7 +104,6 @@ const TableRow = ({
               }}
               key={index}
               onClick={() => {
-                // console.log(item.id, products[product].name);
                 changeItemStatus(order.id, products[product].name);
               }}
             >
@@ -131,7 +136,13 @@ const TableRow = ({
               type="button"
               className="btn  btn-sm "
               onClick={() => {
-                deleteOrder(order.id);
+                if (
+                  confirm(
+                    `Tem a certeza que pretende apagar a encomenda de ${order.name}`
+                  )
+                ) {
+                  deleteOrder(order.id);
+                }
               }}
             >
               <Image src="/trash.png" alt="me" width="25" height="25" />

@@ -11,12 +11,13 @@ const Login = () => {
   const { user, setUser } = useContext(UserContext);
 
   const sendRequest = async () => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: "POST",
-
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({ username, password }),
     };

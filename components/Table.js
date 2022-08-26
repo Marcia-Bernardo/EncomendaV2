@@ -92,7 +92,6 @@ const Table = ({ showEdit, date, link, isAdmin }) => {
       </thead>
       <tbody>
         {data.map((order) => {
-          // console.log(order);
           const map = {};
           order.items.map((displayItem) => {
             map[displayItem.item] = [displayItem.qtd, displayItem.status];

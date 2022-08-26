@@ -1,6 +1,4 @@
 const ListCards = ({ order }) => {
-  // console.log(order);
-
   return (
     <div>
       <table className="table table-bordered mt-3 ">

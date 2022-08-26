@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Cookies from "js-cookie";
 const ItemManager = ({ method, id }) => {
   const [saveName, setSaveName] = useState("");
   const [saveConfTime, setSaveConfTime] = useState("");
@@ -7,12 +7,14 @@ const ItemManager = ({ method, id }) => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const saveItem = async () => {
+    const token = Cookies.get("token");
     const requestMetadata = {
       method: method,
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({
         name: saveName,
@@ -92,7 +94,6 @@ const ItemManager = ({ method, id }) => {
           id="exampleInputTime"
           onChange={(e) => {
             const finalValue = e.target.value.match(/\d*/g)[0];
-            console.log(finalValue);
             setSaveConfTime(finalValue);
           }}
           value={saveConfTime}

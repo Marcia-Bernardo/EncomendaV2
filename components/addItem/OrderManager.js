@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import Form from "./Form";
 import ItemCard from "./ItemCard";
@@ -11,6 +12,7 @@ const OrderManager = ({ method, id, link }) => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const sendRequest = async () => {
+    const token = Cookies.get("token");
     setLoading(true);
     const items = [];
 
@@ -20,13 +22,13 @@ const OrderManager = ({ method, id, link }) => {
         qtd: orderItems[key],
       });
     });
-    console.log(JSON.stringify({ ...clientData, items }));
     const requestMetadata = {
       method: method,
       credential: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        token,
       },
       body: JSON.stringify({ ...clientData, items, id }),
     };
@@ -37,7 +39,6 @@ const OrderManager = ({ method, id, link }) => {
     );
 
     const message = await response.json();
-    console.log(message);
     if (message.error) {
       setClassAlert("alert alert-danger alert-dismissible fade show");
 
